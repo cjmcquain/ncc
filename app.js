@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 
 // express app
 const app = express();
@@ -6,9 +7,19 @@ const app = express();
 // listen for requests
 app.listen(3000);
 
+app.use(morgan('dev'));
+
 // register view engine
 app.set('view engine', 'ejs');
 // app.set('views', 'myviews');
+
+app.use((req, res, next) => {
+    console.log('request made');
+    console.log('host: ', req.hostname);
+    console.log('path: ', req.path);
+    console.log('method: ', req.method);
+    next();
+});
 
 app.get('/', (req, res) => {
   const blogs = [
