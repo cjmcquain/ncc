@@ -3,11 +3,12 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const { add } = require('lodash');
 const Blog = require('./models/blog');
+const dbURI = require('./db');
 
 // express app
 const app = express();
 
-const dbURI = 'mongodb+srv://netninja:Test1234@cluster0.cqpkb.mongodb.net/node-tuts?retryWrites=true&w=majority';
+
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => app.listen(3000))
   .catch((err) => console.log(err) );
